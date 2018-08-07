@@ -6,9 +6,17 @@ require 'securerandom'
 
 module SinespClient
 
+  @@key = "#8.1.0#g8LzUadkEHs7mbRqbX5l"
+  @@url = "https://189.9.194.154/sinesp-cidadao/mobile/consultar-placa/v4"
+
   include HTTParty
 
   default_options.update(verify: false)
+
+  def self.set_config(key, url)
+    @@key = key
+    @@url = url
+  end
 
   def self.lat
     rand(-90.000000000...90.000000000)
@@ -20,9 +28,8 @@ module SinespClient
 
   def self.search(plate)
 
-    key = "#8.1.0#Mw6HqdLgQsX41xAGZgsF"
     digest = OpenSSL::Digest.new('sha1')
-    hash = OpenSSL::HMAC.hexdigest(digest, plate + key, plate)
+    hash = OpenSSL::HMAC.hexdigest(digest, plate + @@key, plate)
 
     body = "<v:Envelope xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:d=\"http://www.w3.org/2001/XMLSchema\" xmlns:c=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:v=\"http://schemas.xmlsoap.org/soap/envelope/\">
              <v:Header>
@@ -56,7 +63,7 @@ module SinespClient
 
     #begin
 
-    response = post("https://189.9.194.154/sinesp-cidadao/mobile/consultar-placa/v3", body: body, headers: headers, timeout: 20)
+    response = post(@@url, body: body, headers: headers, timeout: 20)
 
     #rescue
     #  return nil
