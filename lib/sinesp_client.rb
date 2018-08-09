@@ -26,8 +26,6 @@ module SinespClient
     rand(-180.000000000...180.000000000)
   end
 
-  def
-
   def self.search(plate)
 
     digest = OpenSSL::Digest.new('sha1')
