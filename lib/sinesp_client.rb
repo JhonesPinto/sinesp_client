@@ -42,7 +42,7 @@ module SinespClient
               <h>#{long}</h>
               <i>#{lat}</i>
               <k />
-              <l>#{Time.now.strftime('%Y/%m/%d %H:%m:%S %z')}</l>
+              <l>#{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}</l>
               <m>8797e74f0d6eb7b1ff3dc114d4aa12d3</m>
              </v:Header>
              <v:Body>
